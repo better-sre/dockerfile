@@ -2,6 +2,14 @@
 # python 3.6:
 
 
+## docker pull:
+
+```
+
+docker pull servicemesh/dockerfile:tagname
+
+```
+
 ## docker build:
 
 - https://docs.docker.com/engine/reference/commandline/build/#use-a-dockerignore-file
