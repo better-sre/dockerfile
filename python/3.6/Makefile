@@ -8,11 +8,11 @@
 ######################################################################################################
 
 build:
-	docker build --file Dockerfile --tag "servicemesh/dockerfile:python-3.6.5" .
+	docker build --file ./Dockerfile --tag "servicemesh/dockerfile:python-3.6.5" .
 
 
 build.local:
-	docker build --file Dockerfile.local --tag "servicemesh/dockerfile:python-local-3.6.5" .
+	docker build --file ./Dockerfile.local --tag "servicemesh/dockerfile:python-local-3.6.5" .
 
 
 clean:

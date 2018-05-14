@@ -1,16 +1,11 @@
-#FROM python:3.6
-FROM python:3.6.5-alpine3.6
+FROM python:3.6.5
 
 
 ENV PYTHONUNBUFFERED 1
 
-RUN addgroup -S django \
-    && adduser -S -g django django
-
 ######################################################################################################
 #  install Tools:
 ######################################################################################################
-
 
 #-----------------------
 # tini:
@@ -21,28 +16,6 @@ ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /usr/
 # RUN chmod +x /tini
 RUN chmod +x /usr/local/bin/tini
 
-#-----------------------
-# mysql client:
-#-----------------------
-
-
-RUN apk add --no-cache alpine-sdk
-RUN apk add --no-cache mysql-client
-RUN apk add --no-cache mariadb-dev
-RUN apk add --no-cache libffi-dev
-# RUN apk add --no-cache openssl-dev
-# fix openssl conflicts:
-RUN apk add --no-cache libressl-dev
-RUN apk add --no-cache jpeg-dev zlib-dev
-# fix lxml
-RUN apk add --no-cache libxml2-dev libxslt-dev
-
-
-
-#-----------------------
-# tools:
-#-----------------------
-
 
 ######################################################################################################
 # install python libs:
@@ -52,20 +25,11 @@ RUN apk add --no-cache libxml2-dev libxslt-dev
 COPY ./requirements /requirements
 RUN pip install --no-cache-dir -r /requirements/production.txt
 
-######################################################################################################
-# python src codes:
-######################################################################################################
-
-COPY . /app
-
 
 ######################################################################################################
 # run service:
 ######################################################################################################
 
-RUN chown -R django /app
-USER django
-WORKDIR /app
 
 CMD ["python3"]
 
